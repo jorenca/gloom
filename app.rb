@@ -2,11 +2,14 @@ require 'sinatra'
 require 'rpi_gpio'
 require 'logger'
 
+log_file = File.new(
+  Time.new.strftime('logs/%Y-%m-%d %H-%M-%S.log'),
+  'w'
+)
+log_file.sync = true
+
 logger = Logger.new(
-  File.new(
-    Time.new.strftime('logs/%Y-%m-%d %H-%M-%S.log'),
-    'w'
-  ),
+  log_file,
   10, # aged files
   1_024_000 # 1Mb each
 )
@@ -26,8 +29,9 @@ class Io
     }
   end
 
-  def initialize
+  def initialize(logger)
     @state = {}
+    @logger = logger
     pins.each do |type, pin_list|
       pin_list.each do |name, pin|
         @state[name] = 0
@@ -40,7 +44,7 @@ class Io
   attr_accessor :state
 
   def set(pin_name, value)
-    logger.info('GPIO') { 'invoked set for ' + pin_name.to_s + ' to ' + value }
+    @logger.info('GPIO') { 'invoked set for ' + pin_name.to_s + ' to ' + value.to_s }
     pin = pins[:output][pin_name]
     @state[pin_name] = value
     value ? RPi::GPIO.set_high(pin) : RPi::GPIO.set_low(pin)
@@ -48,7 +52,7 @@ class Io
 end
 
 
-io = Io.new
+io = Io.new(logger)
 logger.info('Initialized at ' + Time.now.to_s)
 
 get '/' do
