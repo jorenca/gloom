@@ -12,5 +12,5 @@ To start the server, run:
 - `ruby app.rb` (possibly `sudo`)
 
 ## Crontab
-m1 hlist * * * * curl localhost:80/set/air/1
+m1 hlist * * * * curl localhost:80/set/air/1  
 m2 hlist * * * * curl localhost:80/set/air/0
