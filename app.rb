@@ -7,11 +7,10 @@ logger = Logger.new(
     Time.new.strftime('logs/%Y-%m-%d %H-%M-%S.log'),
     'w'
   ),
-  10, #aged files
-  1024000 # 1Mb each
+  10, # aged files
+  1_024_000 # 1Mb each
 )
 logger.level = Logger::INFO
-
 
 set :port, 80
 set :bind, '0.0.0.0'
@@ -37,7 +36,7 @@ class Io
       end
     end
   end
-  
+
   attr_accessor :state
 
   def set(pin_name, value)
