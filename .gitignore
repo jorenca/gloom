@@ -1,3 +1,7 @@
+logs/
+
+
+
 *.gem
 *.rbc
 /.config
