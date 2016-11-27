@@ -2,7 +2,7 @@
 Raspberry Pi controller code for the Gloom automated box kit
 
 ## Setup
-Assuming you already have ruby >=2.0.0 installed:
+Assuming you already have ruby >=1.9.3 installed:
 - install `wiringPi` somehow
 - install dependencies
   - `gem install bundler`
@@ -14,5 +14,5 @@ To start the server, run:
 
 ## Crontab
 Use `crontab -e` to set your cronjobs:  
-`m1 hlist * * * * curl localhost:80/set/air/1`  
-`m2 hlist * * * * curl localhost:80/set/air/0`
+`m1 hlist * * * curl localhost:80/set/air/1`  
+`m2 hlist * * * curl localhost:80/set/air/0`
