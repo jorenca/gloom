@@ -15,8 +15,11 @@ logger.level = Logger::INFO
 
 io = Io.new(logger)
 
+set :io, io
+
 get '/' do
-  io.state.to_s
+  @io = io
+  erb :main
 end
 
 get '/set/:pin/:state' do
