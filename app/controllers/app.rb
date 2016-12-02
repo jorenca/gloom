@@ -15,8 +15,6 @@ logger.level = Logger::INFO
 
 io = Io.new(logger)
 
-set :io, io
-
 get '/' do
   @io = io
   erb :main
